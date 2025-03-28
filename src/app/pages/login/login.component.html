@@ -1,0 +1,32 @@
+<form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+  <!-- Email Field -->
+  <div class="mb-3">
+    <label class="form-label">Email</label>
+    <input type="email" class="form-control" name="email" [(ngModel)]="email" required minlength="10" email #emailRef="ngModel" />
+
+    @if (emailRef.invalid && emailRef.touched) {
+      @if (emailRef.errors?.['minlength']) {
+        <div class="text-danger">Email must be at least 10 characters</div>
+      }
+      @if (emailRef.errors?.['email']) {
+        <div class="text-danger">Enter a valid email</div>
+      }
+    }
+  </div>
+
+  <!-- Password Field -->
+  <div class="mb-3">
+    <label class="form-label">Password</label>
+    <input type="password" class="form-control" name="password" [(ngModel)]="password" required minlength="6" #passwordRef="ngModel" />
+
+    @if (passwordRef.invalid && passwordRef.touched) {
+      @if (passwordRef.errors?.['minlength']) {
+        <div class="text-danger">Password must be at least 6 characters</div>
+      }
+    }
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Login</button>
+</form>
+
+
